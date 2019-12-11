@@ -12,13 +12,18 @@
 <body>
     <div id="app">
         <img :src="img" :alt="name">
-        {{ name }}
-        <span v-if="changePercent > 0">
-            👍
-        </span>
-        <span v-else>
-            👎
-        </span>
+        <h1>{{ name }}</h1>
+        <span v-if="changePercent > 0">👍</span>
+        <span v-else-if="changePercent < 0">👎</span>
+        <span v-else="changePercent === 0">✋</span>
+
+        <span @click="toggleShowPrices"> {{showPrices ? '🙊 Ocultar Precios' : '🙈 Ver Precios'}}</span>
+        <ul v-show="showPrices">
+            <li v-for="price in pricesWithDays" :key="price">
+                {{price.day}} {{price.value}}
+            </li>
+        </ul>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
