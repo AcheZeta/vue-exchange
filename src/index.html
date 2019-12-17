@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <img :src="img" :alt="name">
+        <h1 :class="changePercent > 0 ? 'green' : 'orange'">{{ title }}</h1>
+        <span v-if="changePercent > 0">👍</span>
+        <span v-else-if="changePercent < 0">👎</span>
+        <span v-else="changePercent === 0">✋</span>
+
+        <span @click="toggleShowPrices"> {{showPrices ? '🙈 Ocultar Precios' : '🙊 Ver Precios'}}</span>
+
+        <ul v-show="showPrices">
+            <li v-bind:class="{ orange: price == p.value, red: p.value < price, green: p.value > price }"
+                v-for="p in pricesWithDays" :key="p.value">
+                {{p.day}} {{p.value}}
+            </li>
+        </ul>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
